@@ -15,6 +15,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
+      debugShowCheckedModeBanner: false,
       home: const Home(),
     );
   }
