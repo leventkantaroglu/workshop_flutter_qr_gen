@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:workshop_flutter_qr_gen/qr_item.dart';
 
@@ -45,6 +46,11 @@ class _HomeState extends State<Home> {
                 isExpanded = !isExpanded;
               });
             },
+          ),
+          IconButton(
+            icon: const Icon(Icons.code),
+            color: Colors.indigo,
+            onPressed: _launchUrl,
           ),
         ],
       ),
@@ -117,6 +123,14 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Future<void> _launchUrl() async {
+    final _url = Uri.parse(
+        "https://github.com/leventkantaroglu/workshop_flutter_qr_gen");
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
   Widget get addWidget => Icon(
         Icons.add_box_outlined,
         size: 100,
@@ -162,6 +176,7 @@ class _HomeState extends State<Home> {
                           style: const TextStyle(
                             fontSize: 13,
                           ),
+                          maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         )
                       ],
