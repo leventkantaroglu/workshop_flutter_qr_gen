@@ -150,7 +150,7 @@ class _HomeState extends State<Home> {
         margin: const EdgeInsets.all(5),
         alignment: qrItem.alignment ?? Alignment.center,
         child: AspectRatio(
-          aspectRatio: 1,
+          aspectRatio: 0.9,
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
@@ -160,27 +160,33 @@ class _HomeState extends State<Home> {
                 width: 2,
               ),
             ),
-            child: FittedBox(
-              fit: isExpanded ? BoxFit.contain : BoxFit.none,
-              child: qrItem.data == null
-                  ? addWidget
-                  : Column(
-                      children: [
-                        QrImageView(
-                          data: qrItem.data!,
-                          version: QrVersions.auto,
-                          size: 100.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                FittedBox(
+                  fit: isExpanded ? BoxFit.contain : BoxFit.none,
+                  child: qrItem.data == null
+                      ? addWidget
+                      : Column(
+                          children: [
+                            QrImageView(
+                              data: qrItem.data!,
+                              version: QrVersions.auto,
+                              size: 100.0,
+                            ),
+                          ],
                         ),
-                        Text(
-                          qrItem.data ?? "",
-                          style: const TextStyle(
-                            fontSize: 13,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      ],
-                    ),
+                ),
+                Text(
+                  qrItem.data ?? "",
+                  style: const TextStyle(
+                    fontSize: 13,
+                  ),
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
             ),
           ),
         ),
